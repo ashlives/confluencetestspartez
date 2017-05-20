@@ -1,8 +1,8 @@
+package com.example.tests;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import java.lang.*;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 //import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -24,6 +24,8 @@ public class Main {
         return RandomStringUtils.randomAlphabetic(length);
     }
     static String pagetitle = RandomStringUtils.randomAlphabetic(6);
+    private StringBuffer verificationErrors = new StringBuffer();
+    private boolean acceptNextAlert = true;
 
     @BeforeMethod
      public void setup() {
@@ -49,7 +51,7 @@ public class Main {
 
 
     @Test
-    public void createPage() {
+    public void createPage() throws Exception {
         driver.findElement(By.id("quick-create-page-button")).click();
         System.out.println("1. Clicked on Create Page button");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("content-title")));
@@ -101,7 +103,44 @@ public class Main {
 
     @AfterMethod
     public void tearDown(){
-    driver.quit();
+        driver.quit();
+    String verificationErrorString = verificationErrors.toString();
+        if (!"".equals(verificationErrorString)) {
+        fail(verificationErrorString);
+    }
+    }
+
+    private boolean isElementPresent(By by) {
+        try {
+            driver.findElement(by);
+            return true;
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    private boolean isAlertPresent() {
+        try {
+            driver.switchTo().alert();
+            return true;
+        } catch (NoAlertPresentException e) {
+            return false;
+        }
+    }
+
+    private String closeAlertAndGetItsText() {
+        try {
+            Alert alert = driver.switchTo().alert();
+            String alertText = alert.getText();
+            if (acceptNextAlert) {
+                alert.accept();
+            } else {
+                alert.dismiss();
+            }
+            return alertText;
+        } finally {
+            acceptNextAlert = true;
+        }
     }
 
 }
