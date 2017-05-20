@@ -8,6 +8,7 @@ This README would normally document whatever steps are necessary to get your app
 
 ## Test Execution Prequisits ##
 - User should be already logged in to https://ashishtestspartez.atlassian.net/wiki
+- pages.Login is done before every test execution
 
 ## Test 1: Creating a wiki page ##
 - This test fails if message appears "Something went wrong. Please save your changes..". Possible cause is poor network connection or suddent interuption in network.
