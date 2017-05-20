@@ -66,7 +66,7 @@ public class Main {
     public void restrictions()
     {
         driver.findElement(By.linkText("XQhIbu")).click();
-        System.out.println("Open page - XQhIbu");
+        System.out.println("1. Open page - XQhIbu");
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -75,16 +75,16 @@ public class Main {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("content-metadata-page-restrictions")));
         driver.findElement(By.id("content-metadata-page-restrictions")).click();
 
-        System.out.println("Click on Restrictions icon");
+        System.out.println("2. Click on Restrictions icon");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("aui-dialog2-header-main")));
         driver.switchTo().activeElement();
-        System.out.println("Switched to Overlay");
+        System.out.println("3. Switched to Overlay");
         assertEquals(driver.findElement(By.cssSelector("h2.aui-dialog2-header-main")).getText(), "Restrictions");
-        System.out.println("Restriction Pop-up appeared");
+        System.out.println("4. Restriction Pop-up appeared");
         driver.switchTo().activeElement();
         driver.findElement(By.className("page-restrictions-dialog-selector-container")).click();
-        System.out.println("Clicked on dropdown");
-        //driver.findElement(By.id("select2-drop-mask")).click();
+        System.out.println("5. Clicked on dropdown");
+
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -93,10 +93,10 @@ public class Main {
         WebElement element = driver.findElement(By.id("page-restrictions-dialog-selector"));
         Select se=new Select(element);
         se.selectByValue("edit");
-        System.out.println("Editing Restricted selected");
+        System.out.println("6. Editing Restricted selected");
         wait.until(ExpectedConditions.elementToBeClickable(By.id("page-restrictions-dialog-save-button"))).click();
-        //driver.findElement(By.id("page-restrictions-dialog-save-button")).click();
-        System.out.println("Clicked on Apply");
+
+        System.out.println("7. Clicked on Apply");
     }
 
     @AfterMethod
