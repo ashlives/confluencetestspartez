@@ -1,14 +1,17 @@
 import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.*;
+import java.lang.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 //import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import static org.testng.Assert.*;
 
 /**
  * Created by Ashish on 19-05-2017.
@@ -60,8 +63,40 @@ public class Main {
     }
 
     @Test(priority = 1)
-    public void restrictions(){
-        System.out.println("Page to click -" + pagetitle);
+    public void restrictions()
+    {
+        driver.findElement(By.linkText("XQhIbu")).click();
+        System.out.println("Open page - XQhIbu");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("content-metadata-page-restrictions")));
+        driver.findElement(By.id("content-metadata-page-restrictions")).click();
+
+        System.out.println("Click on Restrictions icon");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("aui-dialog2-header-main")));
+        driver.switchTo().activeElement();
+        System.out.println("Switched to Overlay");
+        assertEquals(driver.findElement(By.cssSelector("h2.aui-dialog2-header-main")).getText(), "Restrictions");
+        System.out.println("Restriction Pop-up appeared");
+        driver.switchTo().activeElement();
+        driver.findElement(By.className("page-restrictions-dialog-selector-container")).click();
+        System.out.println("Clicked on dropdown");
+        //driver.findElement(By.id("select2-drop-mask")).click();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        WebElement element = driver.findElement(By.id("page-restrictions-dialog-selector"));
+        Select se=new Select(element);
+        se.selectByValue("edit");
+        System.out.println("Editing Restricted selected");
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("page-restrictions-dialog-save-button"))).click();
+        //driver.findElement(By.id("page-restrictions-dialog-save-button")).click();
+        System.out.println("Clicked on Apply");
     }
 
     @AfterMethod
