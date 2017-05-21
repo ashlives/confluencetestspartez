@@ -12,22 +12,22 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import static org.testng.Assert.*;
-import pages.Login;
+import pages.*;
 
 /**
  * Created by Ashish on 19-05-2017.
  */
+
 public class Main {
 
     private WebDriver driver;
     private WebDriverWait wait;
-    public static String generateRandomString(int length){
-        return RandomStringUtils.randomAlphabetic(length);
-    }
     static String pagetitle = RandomStringUtils.randomAlphabetic(6);
     private StringBuffer verificationErrors = new StringBuffer();
     private boolean acceptNextAlert = true;
     Login objLogin;
+    HomePage objHomePage;
+    CreatePage objCreatePage;
 
     @BeforeMethod
      public void setup() {
@@ -36,23 +36,20 @@ public class Main {
         wait = new WebDriverWait(driver, 50);
         driver.get("https://ashishtestspartez.atlassian.net/wiki");
         objLogin = new Login(driver);
+        objHomePage = new HomePage(driver);
         objLogin.loginToAtlassian("ashish.p.deshmukh@gmail.com");
         objLogin.passToAtlassian("Password123$");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Ashish Deshmukh")));
-        System.out.println("pages.Login was successful");
+        objHomePage.loginVerify("Ashish Deshmukh");
     }
 
 
     @Test
     public void createPage() throws Exception {
-        driver.findElement(By.id("quick-create-page-button")).click();
-        System.out.println("1. Clicked on Create Page button");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("content-title")));
-        System.out.println("2. Draft page loaded");
-        driver.findElement(By.id("content-title")).sendKeys(pagetitle);
-        System.out.println("3. Entered Page Title - " + pagetitle);
-        driver.findElement(By.id("rte-button-publish")).click();
-        System.out.println("4. Clicked on Publish button");
+        objHomePage = new HomePage(driver);
+        objHomePage.createButton();
+        objCreatePage = new CreatePage(driver);
+        objCreatePage.enterContentTitle(pagetitle);
+        objCreatePage.publish();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(pagetitle)));
         System.out.println("5. Entered page title matches with published page title");
     }
@@ -63,7 +60,7 @@ public class Main {
         driver.findElement(By.linkText(pagetitle)).click();
         System.out.println("1. Open page - " + pagetitle);
         try {
-            Thread.sleep(1000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

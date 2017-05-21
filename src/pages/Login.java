@@ -2,12 +2,15 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Login{
     WebDriver driver;
     By username = By.id("username");
     By password = By.id("password");
     By login = By.id("login-submit");
+    WebDriverWait wait;
 
     public Login(WebDriver driver){
        this.driver = driver;
@@ -19,6 +22,7 @@ public class Login{
     }
 
     public void setPassword(String strPassword){
+
         driver.findElement(password).sendKeys(strPassword);
         System.out.println("Password entered");
     }
@@ -29,11 +33,15 @@ public class Login{
     }
 
     public void loginToAtlassian(String strUserName){
+        WebDriverWait wait = new WebDriverWait(driver, 50);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(username));
         this.setUserName(strUserName);
         this.clickLogin();
     }
 
     public void passToAtlassian(String strPassword){
+        WebDriverWait wait = new WebDriverWait(driver, 50);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(password));
         this.setPassword(strPassword);
         this.clickLogin();
     }
