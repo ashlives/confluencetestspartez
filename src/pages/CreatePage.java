@@ -19,8 +19,8 @@ public class CreatePage {
 
     public void enterContentTitle(String title){
         WebDriverWait wait = new WebDriverWait(driver, 50);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(contentTitle));
-        driver.findElement(contentTitle).sendKeys(title);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(contentTitle)).sendKeys(title);
+        //driver.findElement(contentTitle).sendKeys(title);
         System.out.println("Page title entered - " + title);
     }
 

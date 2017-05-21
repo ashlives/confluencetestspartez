@@ -11,7 +11,6 @@ public class HomePage {
     WebDriverWait wait;
     By CreatePage = By.id("quick-create-page-button");
     By profile = By.id("user-menu-link");
-    By userName = By.className("confluence-userlink");
 
     public HomePage(WebDriver driver)
     {
@@ -36,4 +35,10 @@ public class HomePage {
         System.out.println("Logged in by " + loginName);
     }
 
+    public void openPage (String pagetitle){
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(pagetitle))).click();
+        //driver.findElement(By.linkText(pagetitle)).click();
+        System.out.println("Clicked on page " + pagetitle);
+    }
 }
