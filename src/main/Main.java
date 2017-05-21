@@ -51,7 +51,8 @@ public class Main {
         objCreatePage.enterContentTitle(pagetitle);
         objCreatePage.publish();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(pagetitle)));
-        System.out.println("5. Entered page title matches with published page title");
+        assertEquals(driver.findElement(By.linkText(pagetitle)).getText(),pagetitle);
+        System.out.println("Page successfully created");
     }
 
     @Test(priority = 1)
