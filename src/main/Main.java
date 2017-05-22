@@ -6,7 +6,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 //import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -26,13 +25,14 @@ public class Main {
     CreatePage objCreatePage;
     PageDetails objPageDetails;
     RestrictionsPopup objRestrictions;
+    String pageURL;
 
     @BeforeMethod
      public void setup() {
         System.setProperty("webdriver.chrome.driver", "C:\\selenium-java-3.4.0/chromedriver.exe");
         driver = new ChromeDriver();
         wait = new WebDriverWait(driver, 50);
-        driver.get("https://ashishtestspartez.atlassian.net/wiki");
+        driver.get("https://ashishtestspartez.atlassian.net/wiki/spaces/TEST2");
         objLogin = new Login(driver);
         objHomePage = new HomePage(driver);
         objLogin.loginToAtlassian("ashish.p.deshmukh@gmail.com");

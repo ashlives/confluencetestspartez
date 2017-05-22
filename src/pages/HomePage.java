@@ -38,7 +38,6 @@ public class HomePage {
     public void openPage (String pagetitle){
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText(pagetitle))).click();
-        //driver.findElement(By.linkText(pagetitle)).click();
         System.out.println("Clicked on page " + pagetitle);
     }
 }

@@ -10,17 +10,14 @@ public class CreatePage {
     WebDriverWait wait;
     By contentTitle = By.id("content-title");
     By publishButton = By.id("rte-button-publish");
-    By login = By.id("login-submit");
 
     public CreatePage(WebDriver driver){
         this.driver = driver;
     }
 
-
     public void enterContentTitle(String title){
         WebDriverWait wait = new WebDriverWait(driver, 50);
         wait.until(ExpectedConditions.visibilityOfElementLocated(contentTitle)).sendKeys(title);
-        //driver.findElement(contentTitle).sendKeys(title);
         System.out.println("Page title entered - " + title);
     }
 
@@ -29,4 +26,5 @@ public class CreatePage {
         driver.findElement(publishButton).click();
         System.out.println("Clicked on Publish button");
     }
+
 }

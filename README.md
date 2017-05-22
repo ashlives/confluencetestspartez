@@ -19,6 +19,7 @@ This README would normally document whatever steps are necessary to get your app
 
 - This test has three options, to set the restrictions as none, editing restricted, view and editing restricted.
 - Since this test needs an already existing page, its necessary for Test 1 to execute first, i.e a page to be created. Test 2 execute afterwards editing the restrictions of the page created in Test 1.
+- This test fails couple of times since the previously created page was not showing up quickly in All Updates page. Specifically when there were more than one Confluence Space.
 
 ## Exploratory Testing ##
 
