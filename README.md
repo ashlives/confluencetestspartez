@@ -7,8 +7,7 @@ This README would normally document whatever steps are necessary to get your app
 
 ## Test Execution Prequisits ##
 
-- User should be already logged in to https://ashishtestspartez.atlassian.net/wiki
-- Login credentials for test confluence instance (ashish.p.deshmukh@gmail.com/Password123$)
+- User should be already logged in to confluence page of the attlasian
 - Login is done before every test execution
 
 ## Test 1: Creating a wiki page ##
